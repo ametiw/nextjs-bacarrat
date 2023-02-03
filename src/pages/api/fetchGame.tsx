@@ -30,18 +30,22 @@ function hash() {
 }
 
 function selectCards(gameid: string) {
-  let seed = crypto.randomBytes(64).toString("hex");
+  let seed = crypto.randomBytes(128).toString("hex");
   let cards = [];
   let deck = new Deck();
   for (let count = 0; cards.length < 6; count++) {
     const hmac = crypto.createHmac("sha512", gameid).update(seed).digest("hex");
     let nextSeed = hmac;
-    const first7 = hmac.substring(1, 8);
+    const first7 = hmac.substring(0, 7);
     let cardIndex = Math.round(parseInt(first7, 16) / 5162220.288);
     let card = deck.draw(cardIndex);
     seed = nextSeed;
-    if (card == null) continue;
-    cards.push(card);
+    if (card == null) {
+      count--;
+      continue;
+    } else {
+      cards.push(card);
+    }
   }
   return cards;
 }

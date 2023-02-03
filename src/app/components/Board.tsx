@@ -71,25 +71,34 @@ const Hand = ({
 };
 
 const Card = ({ suite, face, delay }: Card) => {
+  let cardName =
+    face === 1
+      ? "A"
+      : face === 10
+      ? "0"
+      : face === 11
+      ? "J"
+      : face === 12
+      ? "Q"
+      : face === 13
+      ? "K"
+      : face.toString();
+  cardName += suite;
   return (
     <div>
       {face !== 0 && (
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.5, delay: delay }}
-          className="bg-contain bg-center w-20 h-32 md:w-24 md:h-36 lg:w-32 lg:h-44 bg-sky-300 rounded-md flex flex-col items-center justify-center p-1"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.2, delay: delay ? delay / 3 : 0 }}
+          className="bg-contain bg-center w-20 h-28 md:w-24 md:h-32 lg:w-32 lg:h-44 bg-sky-300 rounded-md flex flex-col items-center justify-center p-1"
         >
-          <div className="w-full h-full bg-white rounded boarder-2 boarder-inset border-black">
-            <div>
-              <div className="rounded-full w-5 h-5 bg-black text-sm text-center m-1">
-                {face}
-              </div>
-            </div>
-            <div className="flex text-black flex-grow h-full justify-center items-center ">
-              {suite}
-            </div>
-          </div>
+          <div
+            className="w-full h-full bg-white rounded boarder-2 boarder-inset border-black bg-contain bg-no-repeat bg-center"
+            style={{
+              backgroundImage: `url("https://deckofcardsapi.com/static/img/${cardName}.png"`,
+            }}
+          ></div>
         </motion.div>
       )}
       {face === 0 && (

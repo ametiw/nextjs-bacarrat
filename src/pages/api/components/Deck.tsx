@@ -3,7 +3,7 @@ interface Card {
   face: number;
 }
 export default class Deck {
-  suites: Array<string> = ["spades", "hearts", "clubs", "diamonds"];
+  suites: Array<string> = ["S", "H", "C", "D"];
   deck: Array<Card> = Array<Card>(52);
   constructor() {
     let index = 0;
@@ -14,6 +14,7 @@ export default class Deck {
         index++;
       }
     });
+    this.shuffle();
   }
 
   shuffle = () => {
@@ -22,6 +23,8 @@ export default class Deck {
   };
 
   draw = (index: number) => {
-    return this.deck[index];
+    if (index > this.deck.length) index = this.deck.length;
+    let card = this.deck.splice(index, 1);
+    return card[0];
   };
 }
