@@ -53,7 +53,7 @@ const Hand = ({
       initial={{ scaleX: 0 }}
       animate={{ scaleX: 1 }}
       transition={{ duration: 0.5 }}
-      className={`border-2 p-1 rounded-lg flex flex-col items-center my-3 transition-colors ${
+      className={`border-2 w-72 h-44 md:w-80 md:h-48 lg:w-[26rem] lg:h-60 p-1 rounded-lg flex flex-col items-center my-3 transition-all ${
         winner ? "bg-green-400" : null
       }`}
     >
@@ -91,10 +91,10 @@ const Card = ({ suite, face, delay }: Card) => {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 0.2, delay: delay ? delay / 3 : 0 }}
-          className="bg-contain bg-center w-20 h-28 md:w-24 md:h-32 lg:w-32 lg:h-44 bg-sky-300 rounded-md flex flex-col items-center justify-center p-1"
+          className="bg-contain bg-center w-20 h-28 md:w-24 md:h-32 lg:w-32 lg:h-44 bg-transparent rounded-md flex flex-col items-center justify-center"
         >
           <div
-            className="w-full h-full bg-white rounded boarder-2 boarder-inset border-black bg-contain bg-no-repeat bg-center"
+            className="w-full h-full bg-transparent rounded boarder-2 boarder-inset border-black bg-contain bg-no-repeat bg-center"
             style={{
               backgroundImage: `url("https://deckofcardsapi.com/static/img/${cardName}.png"`,
             }}
@@ -102,7 +102,7 @@ const Card = ({ suite, face, delay }: Card) => {
         </motion.div>
       )}
       {face === 0 && (
-        <div className="bg-contain bg-center w-20 h-32 md:w-32 md:h-48 lg:w-32 lg:h-48 bg-white rounded-md flex flex-col items-center justify-center p-1">
+        <div className="bg-contain bg-center w-20 h-28 md:w-24 md:h-32 lg:w-32 lg:h-44 bg-white rounded-md flex flex-col items-center justify-center p-1">
           <div className="w-full h-full bg-sky-300 rounded boarder-2 boarder-inset border-black"></div>
         </div>
       )}
@@ -142,18 +142,18 @@ const Board = () => {
           <div className="flex flex-col md:flex-row md:space-x-5 mt-5">
             <div className="">
               <Hand
-                cards={playerCards}
-                label="Player"
-                score={playerResult}
-                winner={winner == "player" ? true : false}
-              />
-            </div>
-            <div className="">
-              <Hand
                 cards={houseCards}
                 label="House"
                 score={houseResult}
                 winner={winner == "house" ? true : false}
+              />
+            </div>
+            <div className="">
+              <Hand
+                cards={playerCards}
+                label="Player"
+                score={playerResult}
+                winner={winner == "player" ? true : false}
               />
             </div>
           </div>
